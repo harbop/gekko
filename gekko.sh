@@ -1,5 +1,8 @@
 #!/bin/bash
 
+logdir=/var/log/gekko
+logfile=$logdir/gekko.log
+
 function makeGekkoStartOnReboot {
         echo "@reboot /root/gekko/gekko.sh" >> /var/spool/cron/crontabs/root
 }
@@ -14,18 +17,23 @@ function installNode {
 }
 
 function startGekko {
-        cd /root/gekko
+        cd /root/gekko        
+
+        # create log dir
+        mkdir $logdir
+
+        # set up logrotate
+        cp gekko /etc/logrotate.d/
 
         # begin gekko specific stuff
-        npm install --only=production
+        npm install --only=production 2>&1 | tee -a $logfile
 
         # make sure we have prefetched data
-        node gekko --config config-prod.js --import
+        node gekko --config config-prod.js --import 2>&1 | tee -a $logfile
 
         # start the trader
-        node gekko --config config-prod.js
+        node gekko --config config-prod.js 2>&1 | tee -a $logfile
 }
 
 installNode
 startGekko
-

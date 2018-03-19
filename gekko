@@ -1,0 +1,7 @@
+/var/log/gekko/gekko.log {
+  rotate 12
+  daily
+  compress
+  missingok
+  notifempty
+}
