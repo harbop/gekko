@@ -23,7 +23,7 @@ function startGekko {
         mkdir $logdir
 
         # set up logrotate
-        cp gekko /etc/logrotate.d/
+        cp logrotage.gekko /etc/logrotate.d/gekko
 
         # begin gekko specific stuff
         npm install --only=production 2>&1 | tee -a $logfile
