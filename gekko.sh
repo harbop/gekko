@@ -26,13 +26,13 @@ function startGekko {
         cp logrotage.gekko /etc/logrotate.d/gekko
 
         # begin gekko specific stuff
-        npm install --only=production 2>&1 | tee -a $logfile
+        npm install --only=production >> $logfile 2>&1
 
         # make sure we have prefetched data
-        node gekko --config config-prod.js --import 2>&1 | tee -a $logfile
+        node gekko --config config-prod.js --import >> $logfile 2>&1
 
         # start the trader
-        node gekko --config config-prod.js 2>&1 | tee -a $logfile
+        node gekko --config config-prod.js >> $logfile 2>&1
 }
 
 installNode
