@@ -1,4 +1,5 @@
 /var/log/gekko/gekko.log {
+  copytruncate
   rotate 12
   daily
   compress
