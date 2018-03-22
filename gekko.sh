@@ -29,7 +29,7 @@ function startGekko {
         npm install --only=production >> $logfile 2>&1
 
         # make sure we have prefetched data
-        node gekko --config config-prod.js --import >> $logfile 2>&1
+        #node gekko --config config-prod.js --import >> $logfile 2>&1
 
         # start the trader
         node gekko --config config-prod.js >> $logfile 2>&1
